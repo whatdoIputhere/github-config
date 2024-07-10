@@ -1,0 +1,1 @@
+variable "gh_pat" {}
