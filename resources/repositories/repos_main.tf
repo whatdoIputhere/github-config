@@ -1,3 +1,12 @@
+provider "github" {
+  owner = "pecarmoorg"
+}
+
+module "repo_github-config" {
+  source = "../../modules/gh_repo"
+  repo_name = "github-config"
+}
+
 module "repo_api" {
     source = "../../modules/gh_repo"
     repo_name = "api"

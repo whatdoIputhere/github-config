@@ -1,6 +1,5 @@
 provider "github" {
   owner = "pecarmoorg"
-  
 }
 
 resource "github_membership" "admin" {
@@ -8,7 +7,7 @@ resource "github_membership" "admin" {
   role = "admin"
 }
 
-resource "github_membership" "member2" {
+resource "github_membership" "whatdoIputhereTEST" {
   username = "whatdoIputhereTEST"
   role = "member"
 }

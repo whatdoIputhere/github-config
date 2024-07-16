@@ -1,7 +1,3 @@
-provider "github" {
-  owner = "pecarmoorg"
-}
-
 resource "github_team" "api_team" {
   name        = var.team_name
   description = var.team_description

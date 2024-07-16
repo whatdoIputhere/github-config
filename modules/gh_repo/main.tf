@@ -1,7 +1,3 @@
-provider "github" {
-  owner = "pecarmoorg"
-}
-
 resource "github_repository" "repo" {
     name = var.repo_name
     visibility = var.repo_visibility
