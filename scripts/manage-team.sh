@@ -10,11 +10,9 @@ file_path="../resources/teams/teams_main.tf"
 
 git config --global user.email "pedromgc21@gmail.com"
 git config --global user.name "whatdoIputhere"
-gh auth login --with-token "$gh_token"
-
+export github_token="$GH_TOKEN"
 gh auth status
 
-echo "$gh_token"
 
 if [ "$option" == "Create team" ]; then
     echo "Creating team"
