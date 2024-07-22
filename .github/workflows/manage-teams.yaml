@@ -25,6 +25,12 @@ on:
                 description: "Team members"
                 required: false
 
+env:
+    ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+    ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+    ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
 jobs:
     terraform:
         name: Create GitHub Team
@@ -48,10 +54,3 @@ jobs:
               run: |
                   cd scripts
                   ./manage-team.sh ${{ inputs.option }} ${{ inputs.team_name }} ${{ inputs.team_description }} ${{ inputs.team_repo }} ${{ inputs.team_members }} ${{ secrets.GH_PAT }}
-
-            - name: Terraform Apply
-              env:
-                  GH_TOKEN: ${{ secrets.GH_PAT }}
-              run: |
-                  terraform init
-                  terraform apply --auto-approve -var "gh_pat=${GH_TOKEN}"

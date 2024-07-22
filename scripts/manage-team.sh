@@ -9,7 +9,7 @@ repo_name="$5"
 file_path="../resources/teams/teams_main.tf"
 
 gh auth logout
-export github_token="$6"
+export GH_TOKEN="$6"
 gh auth status
 
 if [ "$option" == "Create team" ]; then  
