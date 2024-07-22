@@ -134,4 +134,4 @@ if [ "$option" == "Remove member" ]; then
     git commit -m "Remove member(s) from module $module_name"
 fi
 
-git push origin main
+git push https://x-access-token:$github_token@github.com/pecarmoorg/github-config.git
