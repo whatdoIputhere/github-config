@@ -38,13 +38,13 @@ jobs:
               run: chmod +x scripts/manage-team.sh
 
             - name: Make changes to teams terraform file
-              env:
-                  GH_TOKEN: ${{ secrets.GH_PAT }}
               run: |
                   cd scripts
                   ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo }}" "${{ inputs.team_members }}" "${{ secrets.GH_PAT }}"
 
             - name: Commit and push changes
+              env:
+                  GH_TOKEN: ${{ secrets.GH_PAT }}
               run: |
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"

@@ -4,8 +4,8 @@ option="$1"
 module_name="${2}_team"
 team_name="$2"
 team_description="$3"
-team_members="$5"
 repo_name="$4"
+team_members="$5"
 file_path="../resources/teams/teams_main.tf"
 
 if [ "$option" == "Create team" ]; then
