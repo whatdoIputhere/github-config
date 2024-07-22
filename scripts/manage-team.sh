@@ -29,9 +29,6 @@ module $module_name {
     repo_name = \"$repo_name\"
 }" >> "$file_path"
     echo "Added module $module_name"
-
-    git add .
-    git commit -m "Add module $module_name"
 fi
 
 if [ "$option" == "Delete team" ]; then 
@@ -42,9 +39,6 @@ if [ "$option" == "Delete team" ]; then
 
     sed -i -e "/^$/N;/\nmodule $module_name {/,/}/ d;" "$file_path"
     echo "Removed module $module_name"
-
-    git add .
-    git commit -m "Remove module $module_name"
 fi
 
 
@@ -89,9 +83,6 @@ if [ "$option" == "Add member" ]; then
     sed -i -e "/^$/N;/\nmodule $module_name {/,/}/ s/$escaped_current_members/$escaped_new_members/" "$file_path"
     echo "Added the following member(s) to module $module_name"
     echo "${non_members[@]}"
-
-    git add .
-    git commit -m "Add member(s) to module $module_name"
 fi
 
 
@@ -123,9 +114,4 @@ if [ "$option" == "Remove member" ]; then
     
     echo "Removed the following member(s) from module $module_name"
     echo "${member_array[@]}"
-
-    git add .
-    git commit -m "Remove member(s) from module $module_name"
 fi
-
-git push
