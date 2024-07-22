@@ -1,17 +1,18 @@
 name: Create GitHub Team
-
+permissions:
+    contents: write
 on:
     workflow_dispatch:
         inputs:
             option:
-              description: "Options"
-              required: true
-              type: choice
-              options:
-                - Create team
-                - Delete team
-                - Add member
-                - Remove member
+                description: "Options"
+                required: true
+                type: choice
+                options:
+                    - Create team
+                    - Delete team
+                    - Add member
+                    - Remove member
             team_name:
                 description: "Team name"
                 required: true
@@ -38,8 +39,23 @@ jobs:
 
             - name: Make changes to teams terraform file
               env:
-                GH_TOKEN: ${{ secrets.GH_PAT }}
+                  GH_TOKEN: ${{ secrets.GH_PAT }}
               run: |
                   cd scripts
                   ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo }}" "${{ inputs.team_members }}" "${{ secrets.GH_PAT }}"
-            
+
+            - name: Commit and push changes
+              run: |
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "github-actions[bot]"
+                  git add .
+                  if ${{ inputs.option == 'Create team' }}; then
+                        git commit -m "Create team ${{ inputs.team_name }}"
+                    elif ${{ inputs.option == 'Delete team' }}; then
+                        git commit -m "Delete team ${{ inputs.team_name }}"
+                    elif ${{ inputs.option == 'Add member' }}; then
+                        git commit -m "Add member(s) to team ${{ inputs.team_name }}"
+                    elif ${{ inputs.option == 'Remove member' }}; then
+                        git commit -m "Remove member(s) from team ${{ inputs.team_name }}"
+                    fi
+                  git push

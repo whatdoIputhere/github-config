@@ -8,12 +8,6 @@ team_members="$4"
 repo_name="$5"
 file_path="../resources/teams/teams_main.tf"
 
-git config --global user.email "pedromgc21@gmail.com"
-git config --global user.name "whatdoIputhere"
-export github_token="$GH_TOKEN"
-gh auth status
-
-
 if [ "$option" == "Create team" ]; then
     echo "Creating team"
     if grep -q "module $module_name" "$file_path"; then
@@ -134,4 +128,4 @@ if [ "$option" == "Remove member" ]; then
     git commit -m "Remove member(s) from module $module_name"
 fi
 
-git push https://x-access-token:$github_token@github.com/pecarmoorg/github-config.git
+git push
