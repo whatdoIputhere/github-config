@@ -8,10 +8,9 @@ team_members="$4"
 repo_name="$5"
 file_path="../resources/teams/teams_main.tf"
 
-gh auth logout
-export GH_TOKEN="$6"
-
-echo "Option: $option"
+git config --global user.email "pedromgc21@gmail.com"
+git config --global user.name "whatdoIputhere"
+git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:${{ secrets.GH_PAT }} | base64 --wrap=0)"
 
 if [ "$option" == "Create team" ]; then
     echo "Creating team"
