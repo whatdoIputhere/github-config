@@ -8,9 +8,9 @@ team_members="$4"
 repo_name="$5"
 file_path="../resources/teams/teams_main.tf"
 
-gh auth logout
 export GH_TOKEN="$6"
-gh auth status
+
+echo "Option: $option"
 
 if [ "$option" == "Create team" ]; then  
     if grep -q "module $module_name" "$file_path"; then
@@ -130,3 +130,5 @@ if [ "$option" == "Remove member" ]; then
     git add .
     git commit -m "Remove member(s) from module $module_name"
 fi
+
+git push origin main
