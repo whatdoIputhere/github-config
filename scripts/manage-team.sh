@@ -10,8 +10,12 @@ file_path="../resources/teams/teams_main.tf"
 
 gh auth logout
 export GH_TOKEN="$6"
+echo "$1"
+echo "$2"
+echo "$3"
+echo "$4"
+echo "$5"
 echo "$6"
-gh auth status
 
 if [ "$option" == "Create team" ]; then  
     if grep -q "module $module_name" "$file_path"; then
