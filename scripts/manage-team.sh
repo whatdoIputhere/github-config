@@ -8,11 +8,13 @@ team_members="$4"
 repo_name="$5"
 file_path="../resources/teams/teams_main.tf"
 
+gh auth logout
 export GH_TOKEN="$6"
 
 echo "Option: $option"
 
-if [ "$option" == "Create team" ]; then  
+if [ "$option" == "Create team" ]; then
+    echo "Creating team"
     if grep -q "module $module_name" "$file_path"; then
         echo "Module $module_name already exists in $file_path, no changes made"
         exit 0
