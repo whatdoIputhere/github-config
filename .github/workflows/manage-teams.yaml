@@ -26,15 +26,12 @@ on:
                 required: false
 
 jobs:
-    terraform:
+    manage-teams:
         name: Create GitHub Team
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
               uses: actions/checkout@v3
-
-            - name: Setup Terraform
-              uses: hashicorp/setup-terraform@v1
 
             - name: Add execute permissions to script
               run: chmod +x scripts/manage-team.sh
