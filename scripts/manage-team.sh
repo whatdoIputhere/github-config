@@ -10,7 +10,7 @@ file_path="../resources/teams/teams_main.tf"
 
 git config --global user.email "pedromgc21@gmail.com"
 git config --global user.name "whatdoIputhere"
-git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:$gh_token | base64 --wrap=0)"
+git config --global https://github.com/.extraheader "AUTHORIZATION: basic $(echo -n x-access-token:$gh_token | base64 --wrap=0)"
 
 if [ "$option" == "Create team" ]; then
     echo "Creating team"
