@@ -45,25 +45,9 @@ jobs:
                   git config --global user.name "github-actions[bot]"
 
             - name: Make changes to teams terraform file
-              env:
-                github_token: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   cd scripts
-                  ./manage-team.sh ${{ inputs.option }} ${{ inputs.team_name }} ${{ inputs.team_description }} ${{ inputs.team_repo }} ${{ inputs.team_members }}
-                  git add .
-                  if [ "${{ inputs.option }}" == "Create team" ]; then
-                      git commit -m "Create team ${{ inputs.team_name }}"
-                  fi
-                  if [ "${{ inputs.option }}" == "Delete team" ]; then
-                      git commit -m "Delete team ${{ inputs.team_name }}"
-                  fi
-                  if [ "${{ inputs.option }}" == "Add member" ]; then
-                      git commit -m "Add member to ${{ inputs.team_name }}"
-                  fi
-                  if [ "${{ inputs.option }}" == "Remove member" ]; then
-                      git commit -m "Remove member from ${{ inputs.team_name }}"
-                  fi
-                  git push
+                  ./manage-team.sh ${{ inputs.option }} ${{ inputs.team_name }} ${{ inputs.team_description }} ${{ inputs.team_repo }} ${{ inputs.team_members }} ${{ secrets.GH_PAT }}
 
             - name: Terraform Apply
               env:
