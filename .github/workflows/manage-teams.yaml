@@ -1,4 +1,4 @@
-name: Create GitHub Team
+name: Manage github teams
 permissions:
     contents: write
 on:
