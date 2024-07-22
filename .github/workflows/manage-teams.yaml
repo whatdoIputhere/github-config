@@ -43,7 +43,7 @@ jobs:
               run: |
                   cd scripts
                   ./manage-team.sh ${{ inputs.option }} ${{ inputs.team_name }} ${{ inputs.team_description }} ${{ inputs.team_repo }} ${{ inputs.team_members }}
-                  git add ../terraform/teams.tf
+                  git add ../resources/teams/teams_main.tf
                   if [ "${{ inputs.option }}" == "Create team" ]; then
                       git commit -m "Create team ${{ inputs.team_name }}"
                   fi
