@@ -37,6 +37,8 @@ jobs:
               run: chmod +x scripts/manage-team.sh
 
             - name: Make changes to teams terraform file
+              env:
+                gh_token: ${{ secrets.GH_PAT }}
               run: |
                   cd scripts
                   ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo }}" "${{ inputs.team_members }}" "${{ secrets.GH_PAT }}"
