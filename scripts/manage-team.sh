@@ -10,6 +10,7 @@ file_path="../resources/teams/teams_main.tf"
 
 gh auth logout
 export GH_TOKEN="$6"
+echo "$6"
 gh auth status
 
 if [ "$option" == "Create team" ]; then  
