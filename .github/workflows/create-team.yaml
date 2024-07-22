@@ -1,0 +1,63 @@
+name: Create GitHub Team
+
+on:
+    workflow_dispatch:
+        inputs:
+            option:
+              description: "Options"
+              required: true
+              type: choice
+              options:
+                - Create team
+                - Delete team
+                - Add member
+                - Remove member
+            team_name:
+                description: "Team name"
+                required: true
+            team_description:
+                description: "Team description"
+                required: false
+            team_repo:
+                description: "Repository to add the team to"
+                required: false
+            team_members:
+                description: "Team members"
+                required: false
+
+jobs:
+    terraform:
+        name: Create GitHub Team
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v1
+
+            - name: Make changes to teams terraform file
+              run: |
+                  cd scripts
+                  ./manage-team.sh ${{ inputs.option }} ${{ inputs.team_name }} ${{ inputs.team_description }} ${{ inputs.team_repo }} ${{ inputs.team_members }}
+                  git add ../terraform/teams.tf
+                  if [ "${{ inputs.option }}" == "Create team" ]; then
+                      git commit -m "Create team ${{ inputs.team_name }}"
+                  fi
+                  if [ "${{ inputs.option }}" == "Delete team" ]; then
+                      git commit -m "Delete team ${{ inputs.team_name }}"
+                  fi
+                  if [ "${{ inputs.option }}" == "Add member" ]; then
+                      git commit -m "Add member to ${{ inputs.team_name }}"
+                  fi
+                  if [ "${{ inputs.option }}" == "Remove member" ]; then
+                      git commit -m "Remove member from ${{ inputs.team_name }}"
+                  fi
+                  git push
+
+            - name: Terraform Apply
+              env:
+                  GH_TOKEN: ${{ secrets.GH_PAT }}
+              run: |
+                  terraform init
+                  terraform apply --auto-approve -var "gh_pat=${GH_TOKEN}"
