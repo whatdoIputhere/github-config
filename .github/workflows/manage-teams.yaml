@@ -23,7 +23,7 @@ on:
                 description: "Repository to add the team to"
                 required: false
             team_members:
-                description: "Team members"
+                description: "Team member(s)"
                 required: false
 
 jobs:
@@ -50,12 +50,12 @@ jobs:
                   git config --global user.name "github-actions[bot]"
                   git add .
                   if ${{ inputs.option == 'Create team' }}; then
-                        git commit -m "Create team ${{ inputs.team_name }}"
+                        git commit -m "Create team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Delete team' }}; then
-                        git commit -m "Delete team ${{ inputs.team_name }}"
+                        git commit -m "Delete team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Add member' }}; then
-                        git commit -m "Add member(s) to team ${{ inputs.team_name }}"
+                        git commit -m "Add member(s) to team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Remove member' }}; then
-                        git commit -m "Remove member(s) from team ${{ inputs.team_name }}"
+                        git commit -m "Remove member(s) from team: ${{ inputs.team_name }}"
                     fi
                   git push
