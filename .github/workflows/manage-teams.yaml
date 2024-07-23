@@ -51,7 +51,7 @@ jobs:
               run: |
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
-                  cd ..
+                  ls
                   git add .
                   if ${{ inputs.option == 'Create team' }}; then
                         git commit -m "Create team: ${{ inputs.team_name }}"
