@@ -33,6 +33,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v3
+              with:
+                  token: ${{ secrets.GH_PAT }}
 
             - name: Add execute permissions to script
               run: chmod +x scripts/manage-team.sh
