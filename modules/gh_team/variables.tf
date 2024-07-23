@@ -10,11 +10,6 @@ variable "team_members" {
   type = list(string)
 }
 
-variable "repo_name" {
+variable "team_repo_permissions" {
   type = string
-}
-
-variable "repo_permission" {
-  type = string
-  default = "pull"
 }

@@ -11,24 +11,20 @@ on:
                 options:
                     - Create team
                     - Delete team
+                    - Update team
                     - Add member
                     - Remove member
+                    - Add repository permissions
+                    - Remove repository permissions
             team_name:
                 description: "Team name"
                 required: true
             team_description:
                 description: "Team description"
+                required: false            
+            team_repo_permissions:
+                description: "Repository access permissions for members of the team"
                 required: false
-            team_repo:
-                description: "Repository to add the team to"
-                required: false
-            team_repo_permission:
-                description: "Repository permission"
-                type: choice
-                options:
-                    - Read
-                    - Triage
-                    - Write
             team_members:
                 description: "Team member(s)"
                 required: false
@@ -49,7 +45,7 @@ jobs:
             - name: Make changes to teams terraform file
               run: |
                   cd scripts
-                  ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo }}" "${{ inputs.team_repo_permission }}" "${{ inputs.team_members }}" "${{ secrets.GH_PAT }}"
+                  ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo_permissions }}" "${{ inputs.team_members }}" "${{ secrets.GH_PAT }}"
 
             - name: Commit and push changes
               run: |
@@ -60,6 +56,8 @@ jobs:
                         git commit -m "Create team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Delete team' }}; then
                         git commit -m "Delete team: ${{ inputs.team_name }}"
+                    elif ${{ inputs.option == 'Update team' }}; then
+                        git commit -m "Update team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Add member' }}; then
                         git commit -m "Add member(s) to team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Remove member' }}; then
