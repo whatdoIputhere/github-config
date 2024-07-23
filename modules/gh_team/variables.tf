@@ -15,6 +15,6 @@ variable "repo_name" {
 }
 
 variable "repo_permission" {
-  type = strings
+  type = string
   default = "pull"
 }
