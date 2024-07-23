@@ -13,3 +13,8 @@ variable "team_members" {
 variable "repo_name" {
   type = string
 }
+
+variable "repo_permission" {
+  type = strings
+  default = "pull"
+}

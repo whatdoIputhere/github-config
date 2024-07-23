@@ -25,5 +25,5 @@ resource "github_team_members" "api_team_members" {
 resource "github_team_repository" "api_team_repo" {
   team_id    = github_team.api_team.id
   repository = var.repo_name
-  permission = "push"
+  permission = var.repo_permission
 }

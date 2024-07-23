@@ -5,8 +5,15 @@ module_name="${2}_team"
 team_name="$2"
 team_description="$3"
 repo_name="$4"
-team_members="$5"
+repo_permission="$5"
+team_members="$6"
 file_path="../resources/teams/teams_main.tf"
+
+if [ "$repo_permission" == "read" ]; then
+    repo_permission="pull"
+elif [ "$repo_permission" == "write" ]; then
+    repo_permission="push"
+fi
 
 if [ "$option" == "Create team" ]; then
     echo "Creating team"
@@ -27,6 +34,7 @@ module $module_name {
     team_description = \"$team_description\"
     team_members = [$quoted_members] 
     repo_name = \"$repo_name\"
+    repo_permission = \"$repo_permission\"
 }" >> "$file_path"
     echo "Added module $module_name"
 fi
