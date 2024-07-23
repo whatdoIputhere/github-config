@@ -31,7 +31,7 @@ on:
 
 jobs:
     manage-teams:
-        name: Create GitHub Team
+        name: Manage GitHub Teams
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
@@ -50,18 +50,18 @@ jobs:
                   git config --global user.name "github-actions[bot]"
                   cd ..
                     if ${{ inputs.option == 'Create team' }}; then
-                        git commit -a -m "Create team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Create team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Delete team' }}; then
-                        git commit -a -m "Delete team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Delete team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Update team' }}; then
-                        git commit -a -m "Update team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Update team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Add member' }}; then
-                        git commit -a -m "Add member(s) to team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Add member(s) to team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Remove member' }}; then
-                        git commit -a -m "Remove member(s) from team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Remove member(s) from team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Add repository permissions' }}; then
-                        git commit -a -m "Add repository permissions to team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Add repository permissions to team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Remove repository permissions' }}; then
-                        git commit -a -m "Remove repository permissions from team: ${{ inputs.team_name }}"
+                        git commit -a -m "[Automated] Remove repository permissions from team: ${{ inputs.team_name }}"
                     fi
                   git push
