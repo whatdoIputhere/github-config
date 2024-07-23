@@ -8,11 +8,9 @@ repo_permissions="$4"
 team_members="$5"
 file_path="../resources/teams/teams_main.tf"
 
-if [ "$repo_permissions" == "read" ]; then
-    repo_permission="pull"
-elif [ "$repo_permissions" == "write" ]; then
-    repo_permission="push"
-fi
+repo_permissions=$(echo $repo_permissions | tr '[:upper:]' '[:lower:]')
+repo_permissions=${repo_permissions//write/push}
+repo_permissions=${repo_permissions//read/pull}
 
 if [ "$option" == "Create team" ]; then
     if grep -q "module $module_name" "$file_path"; then
@@ -180,7 +178,10 @@ if [ "$option" == "Add repository permissions" ]; then
     for repo in "${input_repo_array[@]}"; do
         if [[ "$current_repos" == *"$repo"* ]]; then
             echo "Repository permission $repo already assigned to team $module_name"
-        else
+        elif [ -z "$new_repos" ]; then
+            new_repos+="$repo"
+            non_repos+="$repo "
+        else    
             new_repos+=",$repo"
             non_repos+="$repo "
         fi
