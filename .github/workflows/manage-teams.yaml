@@ -49,18 +49,19 @@ jobs:
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
                   cd ..
-                  git status
-                  git add .
-                  if ${{ inputs.option == 'Create team' }}; then
-                        git commit -m "Create team: ${{ inputs.team_name }}"
+                    if ${{ inputs.option == 'Create team' }}; then
+                        git commit -a -m "Create team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Delete team' }}; then
-                        git commit -m "Delete team: ${{ inputs.team_name }}"
+                        git commit -a -m "Delete team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Update team' }}; then
-                        git commit -m "Update team: ${{ inputs.team_name }}"
+                        git commit -a -m "Update team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Add member' }}; then
-                        git commit -m "Add member(s) to team: ${{ inputs.team_name }}"
+                        git commit -a -m "Add member(s) to team: ${{ inputs.team_name }}"
                     elif ${{ inputs.option == 'Remove member' }}; then
-                        git commit -m "Remove member(s) from team: ${{ inputs.team_name }}"
+                        git commit -a -m "Remove member(s) from team: ${{ inputs.team_name }}"
+                    elif ${{ inputs.option == 'Add repository permissions' }}; then
+                        git commit -a -m "Add repository permissions to team: ${{ inputs.team_name }}"
+                    elif ${{ inputs.option == 'Remove repository permissions' }}; then
+                        git commit -a -m "Remove repository permissions from team: ${{ inputs.team_name }}"
                     fi
                   git push
-                  
