@@ -46,8 +46,10 @@ jobs:
               run: |
                   cd scripts
                   ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo_permissions }}" "${{ inputs.team_members }}"
+                  echo "Teams file content:"
+                  cat ../resources/teams/teams_main.tf
 
-            - name: Commit and push changes
+            - name: Commit and push changes              
               run: |
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
