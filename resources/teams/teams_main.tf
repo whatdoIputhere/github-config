@@ -6,6 +6,6 @@ module api_team {
     source = "../../modules/gh_team"
     team_name = "api"
     team_description = "api team"
-    team_members = ["whatdoIputhereTEST"] 
+    team_members = [] 
     repo_name = "api"
 }
