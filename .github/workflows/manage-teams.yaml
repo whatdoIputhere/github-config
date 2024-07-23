@@ -42,13 +42,10 @@ jobs:
             - name: Add execute permissions to script
               run: chmod +x scripts/manage-team.sh
 
-            - name: Make changes to teams terraform file
+            - name: Make and push changes to teams terraform file
               run: |
                   cd scripts
                   ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo_permissions }}" "${{ inputs.team_members }}"
-
-            - name: Commit and push changes
-              run: |
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
                   ls
@@ -65,3 +62,4 @@ jobs:
                         git commit -m "Remove member(s) from team: ${{ inputs.team_name }}"
                     fi
                   git push
+                  
