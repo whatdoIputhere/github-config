@@ -225,11 +225,11 @@ if [ "$option" == "Remove repository permissions" ]; then
     if [ -n "$not_found_permissions" ]; then
         echo "The following permissions weren't found in module $module_name so they couldn't be removed"
         echo "${not_found_permissions%,}"
+        echo ""
     fi
 fi
 
 
 module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
-echo ""
 echo "Module after changes"
 echo "$module"
