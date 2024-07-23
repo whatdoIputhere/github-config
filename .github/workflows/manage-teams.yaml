@@ -48,7 +48,7 @@ jobs:
                   ./manage-team.sh "${{ inputs.option }}" "${{ inputs.team_name }}" "${{ inputs.team_description }}" "${{ inputs.team_repo_permissions }}" "${{ inputs.team_members }}"
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
-                  ls
+                  cd ..
                   git add .
                   if ${{ inputs.option == 'Create team' }}; then
                         git commit -m "Create team: ${{ inputs.team_name }}"

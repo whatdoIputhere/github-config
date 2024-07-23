@@ -14,6 +14,7 @@ module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
 
 echo "Module to be modified"
 echo "$module"
+echo ""
 
 if [ "$option" == "Create team" ]; then
     if grep -q "module $module_name" "$file_path"; then
@@ -227,6 +228,8 @@ if [ "$option" == "Remove repository permissions" ]; then
     fi
 fi
 
+
 module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
+echo ""
 echo "Module after changes"
 echo "$module"
