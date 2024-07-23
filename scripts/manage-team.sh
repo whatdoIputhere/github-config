@@ -1,5 +1,4 @@
 #!/bin/bash
-
 option="$1"
 module_name="${2}_team"
 team_name="$2"
@@ -11,6 +10,10 @@ file_path="../resources/teams/teams_main.tf"
 repo_permissions=$(echo $repo_permissions | tr '[:upper:]' '[:lower:]')
 repo_permissions=${repo_permissions//write/push}
 repo_permissions=${repo_permissions//read/pull}
+module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
+
+echo "Module to be modified"
+echo "$module"
 
 if [ "$option" == "Create team" ]; then
     if grep -q "module $module_name" "$file_path"; then
@@ -59,7 +62,6 @@ if [ "$option" == "Update team" ]; then
     fi
     echo "Updating team"
 
-    module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
 
     current_members=$(echo "$module" | grep "team_members =" | cut -d "=" -f 2 | tr -d '[:space:]')
 
@@ -91,8 +93,6 @@ if [ "$option" == "Update team" ]; then
 fi
 
 if [ "$option" == "Add member" ]; then
-    module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
-
     current_members=$(echo "$module" | grep "team_members =" | cut -d "=" -f 2 | tr -d '[:space:]')
 
     IFS=',' read -r -a input_member_array <<< "$team_members"
@@ -137,7 +137,6 @@ fi
 
 if [ "$option" == "Remove member" ]; then
     echo "Removing member(s)"
-    module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
 
     current_members=$(echo "$module" | grep "team_members =" | cut -d "=" -f 2 | tr -d '[:space:]')
 
@@ -167,8 +166,6 @@ if [ "$option" == "Remove member" ]; then
 fi
 
 if [ "$option" == "Add repository permissions" ]; then
-    module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
-
     current_repos=$(echo "$module" | grep "team_repo_permissions =" | cut -d "=" -f 2 | tr -d '[:space:]' | tr -d '"')
     new_repos+="${current_repos%]}"
 
@@ -199,8 +196,6 @@ if [ "$option" == "Add repository permissions" ]; then
 fi
 
 if [ "$option" == "Remove repository permissions" ]; then
-    module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
-
     current_repos=$(echo "$module" | grep "team_repo_permissions =" | cut -d "=" -f 2 | tr -d '[:space:]' | tr -d '"')
     
     IFS=',' read -r -a permissions_array <<< "$repo_permissions"
@@ -231,3 +226,7 @@ if [ "$option" == "Remove repository permissions" ]; then
         echo "${not_found_permissions%,}"
     fi
 fi
+
+module=$(sed -n "/module $module_name {/,/}/p" "$file_path")
+echo "Module after changes"
+echo "$module"
