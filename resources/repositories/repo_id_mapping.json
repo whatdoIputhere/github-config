@@ -1,0 +1,26 @@
+[
+  {
+    "repo_name": "github_config",
+    "module_id": "repo_62ed3385-5aa7-44ce-9675-c293d4fe0fee"
+  },
+  {
+    "repo_name": "api",
+    "module_id": "repo_05cd1c22-ca4e-46e3-aa25-6fc970a25ada"
+  },
+  {
+    "repo_name": "app2",
+    "module_id": "repo_0afc7736-ec88-45c0-b47a-f43d648eaaba"
+  },
+  {
+    "repo_name": "frontend",
+    "module_id": "repo_e5047ec8-f592-4e9c-87a8-0a5a329c8d34"
+  },
+  {
+    "repo_name": "infra",
+    "module_id": "repo_e947f797-5754-41b8-9057-b5ce45fbf262"
+  },
+  {
+    "repo_name": "updated-test-repo",
+    "module_id": "repo_1fa1b73e-6b52-4da4-b70e-bed2a9d6b57f"
+  }
+]

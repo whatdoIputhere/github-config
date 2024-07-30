@@ -5,4 +5,6 @@ resource "github_repository" "repo" {
     has_issues = true
     has_projects = true
     vulnerability_alerts = true
+    gitignore_template = var.repo_application_type
+    description = var.repo_description
 }

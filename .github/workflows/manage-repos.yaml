@@ -1,0 +1,57 @@
+name: Manage github repos
+permissions:
+    contents: write
+on:
+    workflow_dispatch:
+        inputs:
+            option:
+                description: "Option"
+                required: true
+                type: choice
+                options:
+                    - Create repository
+                    - Update repository
+                    - Delete repository
+            repo_name:
+                description: "Repository name"
+                required: true
+            repo_description:
+                description: "Repository description"
+                required: true
+            application-type:
+                description: "Application type"
+                required: true
+                type: choice
+                options:
+                    - Nodejs
+                    - Dotnet
+                    - None
+
+jobs:
+    manage-repos:
+        name: Manage GitHub Repositories
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+              with:
+                  token: ${{ secrets.GH_PAT }}
+
+            - name: Add execute permissions to script
+              run: chmod +x scripts/manage-repo.sh
+
+            - name: Make and push changes to repos terraform file
+              run: |
+                  cd scripts
+                  ./manage-repo.sh "${{ inputs.option }}" "${{ inputs.repo_name }}" "${{ inputs.repo_description }}" "${{ inputs.application-type }}"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "github-actions[bot]"
+                  cd ..
+                    if ${{ inputs.option == 'Create repo' }}; then
+                        git commit -a -m "[Automated] Create repo: ${{ inputs.repo_name }}"
+                    elif ${{ inputs.option == 'Delete repo' }}; then
+                        git commit -a -m "[Automated] Delete repo: ${{ inputs.repo_name }}"
+                    elif ${{ inputs.option == 'Update repo' }}; then
+                        git commit -a -m "[Automated] Update repo: ${{ inputs.repo_name }}"
+                    fi
+                  git push

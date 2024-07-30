@@ -5,13 +5,13 @@ locals {
   }
 }
 
-resource "github_team" "api_team" {
+resource "github_team" "team" {
   name        = var.team_name
   description = var.team_description
   privacy     = "closed"
 }
 
-resource "github_team_members" "api_team_members" {
+resource "github_team_members" "team_members" {
   team_id = github_team.api_team.id
 
   members {
@@ -28,7 +28,7 @@ resource "github_team_members" "api_team_members" {
   }
 }
 
-resource "github_team_repository" "api_team_repo" {
+resource "github_team_repository" "team_repo" {
   for_each   = local.repo_permission_map
   team_id    = github_team.api_team.id
   repository = each.key
