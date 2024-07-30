@@ -1,4 +1,4 @@
-name: Manage github repos
+name: Manage github repositories
 permissions:
     contents: write
 on:
@@ -16,11 +16,9 @@ on:
                 description: "Repository name"
                 required: true
             repo_description:
-                description: "Repository description"
-                required: true
+                description: "Repository description"                
             application-type:
-                description: "Application type"
-                required: true
+                description: "Application type"                
                 type: choice
                 options:
                     - Nodejs

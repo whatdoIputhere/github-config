@@ -19,6 +19,10 @@ new_repo_name="$(echo "$2" | cut -d">" -f2)"
 repo_description="$3"
 repo_application_type="$4"
 
+if [ "$repo_application_type" == "none" ]; then
+    repo_application_type=""
+fi
+
 module_id=$(get_module_id "$repo_name")
 module=$(sed -n "/module \"repo_$module_id\" {/,/}/p" "$file_path")
 
