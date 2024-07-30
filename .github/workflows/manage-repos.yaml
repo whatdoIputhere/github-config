@@ -45,11 +45,11 @@ jobs:
                   git config --global user.email "github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
                   cd ..
-                    if ${{ inputs.option == 'Create repo' }}; then
-                        git commit -a -m "[Automated] Create repo: ${{ inputs.repo_name }}"
-                    elif ${{ inputs.option == 'Delete repo' }}; then
-                        git commit -a -m "[Automated] Delete repo: ${{ inputs.repo_name }}"
-                    elif ${{ inputs.option == 'Update repo' }}; then
-                        git commit -a -m "[Automated] Update repo: ${{ inputs.repo_name }}"
+                    if ${{ inputs.option == 'Create repository' }}; then
+                        git commit -a -m "[Automated] Create repository: ${{ inputs.repo_name }}"
+                    elif ${{ inputs.option == 'Delete repository' }}; then
+                        git commit -a -m "[Automated] Delete repository: ${{ inputs.repo_name }}"
+                    elif ${{ inputs.option == 'Update repository' }}; then
+                        git commit -a -m "[Automated] Update repository: ${{ inputs.repo_name }}"
                     fi
                   git push
