@@ -19,7 +19,7 @@ new_repo_name="$(echo "$2" | cut -d">" -f2)"
 repo_description="$3"
 repo_application_type="$4"
 
-if [ "$repo_application_type" == "none" ]; then
+if [ "$repo_application_type" == "None" ]; then
     repo_application_type=""
 fi
 

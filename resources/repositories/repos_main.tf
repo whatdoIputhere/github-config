@@ -41,5 +41,5 @@ module "repo_ff06ab82-b977-4f64-92e2-13efb65c199a" {
     source = "../../modules/gh_repo"
     repo_name = "test-repo"
     repo_description = "this is a test repo"
-    repo_application_type = "None"
+    repo_application_type = ""
 }
