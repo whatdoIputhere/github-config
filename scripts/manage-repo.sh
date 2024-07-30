@@ -86,6 +86,11 @@ if [ "$option" == "Delete repository" ]; then
 
     mv "$tmp_file" "$repo_id_mapping_path"
 
+    teams_file="../resources/teams/teams_main.tf"
+    sed -i -e "/team_repo_permissions/s/\b$repo_name:[^,]*,//g" "$teams_file"
+    sed -i -e "/team_repo_permissions/s/,$repo_name:[^,]*\b//g" "$teams_file"
+    sed -i -e "/team_repo_permissions/s/\b$repo_name:[^,]*//g" "$teams_file"
+
     exit 0
 fi
 
@@ -100,13 +105,8 @@ if [ "$option" == "Update repository" ]; then
     echo "Updating repository module $module_id"
 
     if [ "$repo_name" != "$new_repo_name" ]; then
-        # Update repo_name in the repository terraform module
         sed -i -e "/module \"$module_id\" {/,/}/ s/repo_name = \".*\"/repo_name = \"$new_repo_name\"/" "$file_path"
-        
-        # Update repo_name in the repo_id_mapping.json
         sed -i -e "/\"repo_name\": \"$repo_name\"/ s/\"repo_name\": \".*\"/\"repo_name\": \"$new_repo_name\"/" "$repo_id_mapping_path"
-        
-        # Update repo_name in the team module
         teams_file="../resources/teams/teams_main.tf"
         sed -i -e "/module \"team_.*\" {/,/}/ s/$repo_name/$new_repo_name/g" "$teams_file"
     fi
