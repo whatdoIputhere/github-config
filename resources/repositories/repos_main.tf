@@ -36,10 +36,3 @@ module "repo_e947f797-5754-41b8-9057-b5ce45fbf262" {
     repo_application_type = "Terraform"
     repo_description = ""
 }
-
-module "repo_ff06ab82-b977-4f64-92e2-13efb65c199a" {
-    source = "../../modules/gh_repo"
-    repo_name = "test-repo"
-    repo_description = "this is a test repo"
-    repo_application_type = ""
-}

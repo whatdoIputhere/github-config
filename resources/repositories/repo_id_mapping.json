@@ -18,9 +18,5 @@
   {
     "repo_name": "infra",
     "module_id": "repo_e947f797-5754-41b8-9057-b5ce45fbf262"
-  },
-  {
-    "repo_name": "test-repo",
-    "module_id": "repo_ff06ab82-b977-4f64-92e2-13efb65c199a"
   }
 ]
