@@ -36,3 +36,10 @@ module "repo_e947f797-5754-41b8-9057-b5ce45fbf262" {
     repo_application_type = "Terraform"
     repo_description = ""
 }
+
+module "repo_6f55b8b5-bdaf-4752-b77b-728fe21a5e0f" {
+    source = "../../modules/gh_repo"
+    repo_name = "ola"
+    repo_description = "hehexd"
+    repo_application_type = "Nodejs"
+}
